@@ -142,7 +142,7 @@ let output = [];
 
 const childrenFinder = (child_object,key,input1) =>{
 
-    console.log(child_object,input1);
+    // console.log(child_object);
 
 
     temp_output = [];
@@ -159,7 +159,7 @@ const childrenFinder = (child_object,key,input1) =>{
             }
             else{
                 
-                temp_item = {...temp_item, children: childrenFinder(child_object_item.children,child_object_item.key,input1_item.node[input2_item.key].edges)}
+                // temp_item = {...temp_item, children: childrenFinder(child_object_item.children,child_object_item.key,input1_item.node[input2_item.key].edges)}
             }
     
             temp_output.push(temp_item);
