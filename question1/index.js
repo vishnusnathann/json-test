@@ -140,7 +140,7 @@ const input1 = [
 let output = [];
 
 
-const childrenFinder = (child_object,key,input1) =>{
+const childrenFinder = (child_object,key) =>{
 
     // console.log(child_object);
 
@@ -153,13 +153,13 @@ const childrenFinder = (child_object,key,input1) =>{
             temp_item.title = child_object_item.title
             if(child_object_item.children == undefined){
                 await input1.map(async (input1_item,index)=>{
-                    temp_item =  {...temp_item,[`data${index}`]: input1_item.node[child_object_item.key]}
+                    temp_item =  {...temp_item,[`data${index}`]: input1_item.node[key]}
                     
                 })
             }
             else{
                 
-                // temp_item = {...temp_item, children: childrenFinder(child_object_item.children,child_object_item.key,input1_item.node[input2_item.key].edges)}
+                temp_item = {...temp_item, children: childrenFinder(child_object_item.children,child_object_item.key)}
             }
     
             temp_output.push(temp_item);
@@ -168,6 +168,7 @@ const childrenFinder = (child_object,key,input1) =>{
     });
 
     temp_resultPromise.then(res =>{
+        // console.log(temp_output)
         return(temp_output)
     })
 
@@ -185,10 +186,13 @@ const resultPromise = new Promise(async (res,rej)=>{
             })
         }
         else{
-            await input1.map(async (input1_item,index)=>{
-                if(input1_item.node[input2_item.key])
-                    temp_item = {...temp_item, children: childrenFinder(input2_item.children,input2_item.key,input1_item.node[input2_item.key].edges)}
-            })
+            // await input2.children.map(async (item,index)=>{
+            //     temp_item = {...temp_item, children: childrenFinder(item,input2_item.key)}
+                
+            // })
+
+            temp_item = {...temp_item, children: childrenFinder(input2_item.children,input2_item.key)}
+            
         }
 
         output.push(temp_item);
