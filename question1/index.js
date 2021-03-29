@@ -141,6 +141,10 @@ let output = [];
 
 
 const childrenFinder = (child_object,key,input1) =>{
+
+    console.log(child_object,input1);
+
+
     temp_output = [];
 
     const temp_resultPromise = new Promise(async (res,rej)=>{
